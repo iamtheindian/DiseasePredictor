@@ -17,6 +17,8 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.session_protection = None
+
+
 class User(UserMixin ,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(80), nullable=True)
@@ -92,7 +94,7 @@ def predict():
 @cross_origin()
 def predictFunction():
     data = {"result": None}
-    
+
     if request.method in ["POST","OPTIONS"]:
         #print(flask.request,dir(flask.request))
         params = request.json
