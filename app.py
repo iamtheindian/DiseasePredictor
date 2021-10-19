@@ -42,7 +42,7 @@ def load_user(user_id):
 
 @app.route('/')
 def HelloWorld():
-    return render_template('home.html',model_columns=model_columns , title='Home')
+    return render_template('home.html', title='Home')
 
 @app.route('/signin' , methods=['GET','POST'])
 def SignIn():
@@ -89,7 +89,8 @@ def signout():
 @app.route('/predict')
 @login_required
 def predict():
-    return render_template('predict.html')
+    
+    return render_template('predict.html',model_columns=model_columns ,title='Predict')
 
 # Define a predict function as an endpoint
 @app.route("/predictFunction", methods=["GET", "POST","OPTIONS"])

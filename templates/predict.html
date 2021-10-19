@@ -1,1 +1,13 @@
-<h1>Predict here</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{disease}}</h1>
+<form action="/predict-disease" method="POST" id="diseaseform">
+    <select class="demo" multiple id="multipleSelect" name="diseases">
+        {% for sym in model_columns %}
+            <option value="{{ sym }}">{{ sym.title() }}</option>
+        {% endfor %}
+        <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+{% endblock %}

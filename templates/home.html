@@ -2,23 +2,9 @@
 
 {% block content %}
 
-<div #cont>
-    <h1>Symptoms Selection</h1>
-    <div #listbox>
-        <select class="symptoms" multiple>
-            {% for sym in model_columns %}
-                <option value="{{ sym }}">{{ sym.title() }}</option>
-            {% endfor %}
-        </select>
-
-        <script src="../static/dist/dual-listbox.js"></script>
-        <script>
-            symptoms=new DualListBox('.symptoms');
-        </script>
-    </div>
-
+<div>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
 </div>
-
 
 
 {% endblock %}
