@@ -122,9 +122,9 @@ def predictFunction():
 
 if __name__ == '__main__':
     db.create_all()
-    model=load_model("predictor.h5")
-    model_columns=joblib.load("columns.pkl")
-    result_columns=joblib.load("result_columns.pkl")
+    model=load_model("static/mldata/predictor.h5")
+    model_columns=joblib.load("static/mldata/columns.pkl")
+    result_columns=joblib.load("static/mldata/result_columns.pkl")
     print(model_columns,result_columns)
     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
     app.debug = True
