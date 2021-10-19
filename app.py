@@ -96,28 +96,28 @@ def predict():
 @app.route("/predict-disease", methods=["GET", "POST"])
 @login_required
 def predictFunction():
-    data = {"result": None}
+    disease=None
     if request.method =="POST":
-        #print(flask.request,dir(flask.request))
         params = request.form.getlist('diseases')
-        print(params)
         if params == None:
-            data["body"] = "Provide a JSON Dict for prediction."
+            disease = "Provide atlease one symptom for prediction."
 
         # if parameters are found, return a prediction
-        if params != None:
+        if params == None:
+            params={ sym: 1 if sym in params else 0  for sym in model_columns }
+            print(params)
             query=pd.DataFrame(params,index=['i',])
             query=query.reindex(columns=model_columns)
             query=query.to_numpy()
             predictions=model.predict(query)
             response=result_columns[predictions.argmax()]
-            data["result"] = response
+            disease = response
     else:
-        data["body"] = "Provide a JSON Dict for prediction."
+        disease = "Provide atlease one symptom for prediction."
     # return a response in json format
-    print(data)
+    print(disease)
     
-    return render_template('predict.html',prediction=data ,title='Predict')
+    return render_template('predict.html',model_columns=model_columns ,prediction=disease ,title='Predict')
 
 if __name__ == '__main__':
     db.create_all()
