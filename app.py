@@ -99,11 +99,11 @@ def predictFunction():
     disease=None
     if request.method =="POST":
         params = request.form.getlist('diseases')
-        if params == None:
+        if len(params)==0 :
             disease = "Provide atlease one symptom for prediction."
 
         # if parameters are found, return a prediction
-        if params == None:
+        if len(params) > 0:
             params={ sym: 1 if sym in params else 0  for sym in model_columns }
             print(params)
             query=pd.DataFrame(params,index=['i',])
