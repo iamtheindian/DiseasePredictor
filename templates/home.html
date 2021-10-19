@@ -2,9 +2,23 @@
 
 {% block content %}
 
-<div>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi reprehenderit quasi vel excepturi esse? Similique nulla exercitationem soluta vel dolorum deleniti natus optio, perspiciatis minima in, sed rerum blanditiis mollitia corporis nihil reprehenderit aut sunt maiores cumque fugiat sit laboriosam. Odit itaque laborum quidem ullam voluptatibus. Beatae dolores aperiam provident culpa assumenda similique. Facilis, consequatur voluptatem iusto id laudantium aspernatur sequi ipsam, minus expedita animi, tenetur praesentium illo quibusdam suscipit nemo asperiores hic dolore est recusandae voluptates fugiat aliquam. Quae odio quos dolorem ea aliquid magni nam libero voluptate est? Corporis voluptatum dolore distinctio laborum accusamus totam fugiat pariatur amet non excepturi unde officiis, aperiam dolor laboriosam expedita veniam, architecto cupiditate impedit, iure numquam harum dicta eligendi maxime asperiores? Blanditiis molestias laboriosam eos fugiat mollitia voluptate rem fuga repellat cupiditate non hic odit exercitationem molestiae ipsam nam asperiores deserunt veritatis ipsum, dolore autem esse quaerat porro sint? Quae culpa fuga quia quas, maxime blanditiis tenetur adipisci esse tempore aperiam, cupiditate dolore assumenda vitae omnis similique nulla laudantium? Excepturi autem laborum corporis optio neque ratione reiciendis porro? Facere, assumenda tenetur? Suscipit incidunt porro iure, excepturi molestias error debitis nobis aspernatur similique qui totam iste sequi eaque impedit tenetur exercitationem aliquid sapiente quasi, distinctio ipsa. Nobis aut dolore quas explicabo ea, molestiae in nulla aliquam optio, sit animi sunt! Molestias, dolorem ut suscipit eligendi velit debitis dolore iusto ipsam nostrum facere, accusamus voluptates quod corporis. Sit et sequi iste! Autem provident facere eius eligendi nobis, qui unde at, blanditiis maxime consequuntur optio reprehenderit nam enim omnis neque voluptas, necessitatibus vero. Praesentium quam obcaecati exercitationem dolores eveniet repellendus quidem saepe in illo maxime ea ipsa labore, cum laborum. Vel dolores exercitationem labore impedit quas! Iste ea quaerat quos beatae provident vel sed eius nemo, assumenda nobis, minima odio unde sapiente. Nostrum harum facilis reprehenderit corrupti ad ipsam deleniti. Perspiciatis tempora, minus doloremque in culpa id recusandae. Reiciendis at perferendis ut quasi atque vero fuga aliquid iure vitae iusto nihil, error voluptatem nulla. Labore, aut adipisci. Veniam quisquam deserunt temporibus ut ex rerum eum incidunt reiciendis, asperiores ratione nihil vitae amet velit pariatur excepturi distinctio eius minima necessitatibus laborum optio qui voluptatum iure. Quasi animi fugit, est repudiandae dignissimos id asperiores dolores voluptatem. Dolore eveniet in, ea quos deserunt aliquam dicta impedit repellat laudantium? Distinctio, id soluta. Quis, ut similique! Et ipsa tenetur mollitia libero accusamus eum, nihil blanditiis veritatis soluta dolorem repellat perspiciatis voluptates magni harum iste eos deserunt similique voluptas dolorum exercitationem aliquid odit nostrum sequi. Exercitationem corrupti quas, et debitis provident praesentium sunt eveniet illum vitae atque quae labore alias? Iste deleniti architecto expedita recusandae veniam alias obcaecati, odit saepe error distinctio sit vero nam dolor doloribus tenetur nemo ab repellat. Ab blanditiis fugit deleniti quaerat.
-</div>
 
+
+<link href="static/dist/dual-listbox.css" rel="stylesheet">
+<script src="static/dist/dual-listbox.js"></script>
+<script>
+    var symptoms=new DualListBox('.symptoms');
+</script>
+<div #container>
+
+    <div>
+        <select class="symptoms" multiple>
+            {% for sym in model_columns %}
+                <option value="{{ sym }}">{{ sym.title() }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+</div>
 
 {% endblock %}
