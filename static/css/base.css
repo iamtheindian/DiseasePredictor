@@ -1,8 +1,5 @@
 
-#cont {
-    background: center/cover no-repeat url("../images/background.jpg");
+#container {
+    background: center/cover no-repeat url("/static/images/background.jpg");
 }
 
-#listbox{
-    height: fit-content;
-}
