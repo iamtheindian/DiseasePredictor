@@ -89,22 +89,20 @@ def signout():
 @app.route('/predict')
 @login_required
 def predict():
-    
+
     return render_template('predict.html',model_columns=model_columns ,title='Predict')
 
 # Define a predict function as an endpoint
-@app.route("/predictFunction", methods=["GET", "POST","OPTIONS"])
-@cross_origin()
+@app.route("/predict-disease", methods=["GET", "POST"])
+@login_required
 def predictFunction():
     data = {"result": None}
-
-    if request.method in ["POST","OPTIONS"]:
+    if request.method =="POST":
         #print(flask.request,dir(flask.request))
-        params = request.json
-        #print(params,flask.request.get_data(),flask.request.get_json(),flask.request.data)
+        params = request.form.getlist('diseases')
         print(params)
         if params == None:
-            params = request.args
+            data["body"] = "Provide a JSON Dict for prediction."
 
         # if parameters are found, return a prediction
         if params != None:
@@ -118,10 +116,8 @@ def predictFunction():
         data["body"] = "Provide a JSON Dict for prediction."
     # return a response in json format
     print(data)
-    response= jsonify(data)
-
-    print(response)
-    return response
+    
+    return render_template('predict.html',prediction=data ,title='Predict')
 
 if __name__ == '__main__':
     db.create_all()
