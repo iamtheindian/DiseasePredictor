@@ -1,8 +1,16 @@
-from flask import Flask , render_template , request ,session , redirect
+from flask import Flask , render_template , request ,session , redirect, jsonify
 from flask_login import LoginManager , UserMixin , login_user , login_required , logout_user , current_user
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash , check_password_hash
+import pandas as pd
+import numpy as np
+from keras.models import load_model
+import joblib
+from flask_cors import cross_origin
+
+
+
 app = Flask(__name__)
 db = SQLAlchemy(app)
 
@@ -32,7 +40,7 @@ def load_user(user_id):
 
 @app.route('/')
 def HelloWorld():
-    return render_template('home.html' , title='Home');
+    return render_template('home.html',model_columns=model_columns , title='Home')
 
 @app.route('/signin' , methods=['GET','POST'])
 def SignIn():
@@ -79,8 +87,43 @@ def signout():
 def predict():
     return render_template('predict.html')
 
+# Define a predict function as an endpoint
+@app.route("/predictFunction", methods=["GET", "POST","OPTIONS"])
+@cross_origin()
+def predictFunction():
+    data = {"result": None}
+    
+    if request.method in ["POST","OPTIONS"]:
+        #print(flask.request,dir(flask.request))
+        params = request.json
+        #print(params,flask.request.get_data(),flask.request.get_json(),flask.request.data)
+        print(params)
+        if params == None:
+            params = request.args
+
+        # if parameters are found, return a prediction
+        if params != None:
+            query=pd.DataFrame(params,index=['i',])
+            query=query.reindex(columns=model_columns)
+            query=query.to_numpy()
+            predictions=model.predict(query)
+            response=result_columns[predictions.argmax()]
+            data["result"] = response
+    else:
+        data["body"] = "Provide a JSON Dict for prediction."
+    # return a response in json format
+    print(data)
+    response= jsonify(data)
+
+    print(response)
+    return response
+
 if __name__ == '__main__':
     db.create_all()
+    model=load_model("predictor.h5")
+    model_columns=joblib.load("columns.pkl")
+    result_columns=joblib.load("result_columns.pkl")
+    print(model_columns,result_columns)
     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
     app.debug = True
-    app.run(port = 5000)
+    app.run(host='0.0.0.0',port = 5555)
