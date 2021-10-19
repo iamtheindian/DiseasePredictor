@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div #cont>
+<div >
     <h1>Symptoms Selection</h1>
     <div>
         <select class="symptoms" multiple>
@@ -10,13 +10,15 @@
                 <option value="{{ sym }}">{{ sym.title() }}</option>
             {% endfor %}
         </select>
+
+        <script src="../static/dist/dual-listbox.js"></script>
+        <script>
+            symptoms=new DualListBox('.symptoms');
+        </script>
     </div>
 
 </div>
-<script src="../static/dist/dual-listbox.js"></script>
-<script>
-    symptoms=new DualListBox('.symptoms');
-</script>
+
 
 
 {% endblock %}
