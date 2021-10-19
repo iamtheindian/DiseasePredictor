@@ -56,7 +56,9 @@ def SignIn():
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
+            print("User logged in")
             return redirect('/')
+        return render_template('signin.html')
 
 @app.route('/signup' ,  methods=['GET','POST'])
 def SignUp():

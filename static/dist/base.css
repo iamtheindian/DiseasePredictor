@@ -1,3 +1,6 @@
 #cont {
     background-image: cover no-repeat url("../images/background.jpg");
 }
+#listbox{
+    height: fit-content;
+}
